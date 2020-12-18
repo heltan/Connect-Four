@@ -1,4 +1,6 @@
 module.exports = {
+   
+    mode: 'development',
     entry: '/client/src/index.jsx',
     module: {
         rules: [
@@ -14,6 +16,7 @@ module.exports = {
             }
         ]
     },
+
     output: {
         filename: 'bundle.js',
         path: __dirname + '/client/dist/',
