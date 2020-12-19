@@ -12,3 +12,7 @@ table, th, td {
     font-size: 70px;
    width: 600px;
 }
+h2 {
+    font-size: 40px;
+    color: blue;
+}

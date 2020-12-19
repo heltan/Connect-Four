@@ -4,8 +4,7 @@ import React from 'react';
 const BoardRender= (props) => {
     //test gamelogic
     //make a table
-    console.log('c1', props.c1);
-    console.log('c5', props.c5);
+
     let entireBoard= [];
     let boardButtons = [];
      //first we want to push the buttons for user to press, to 'drop' checkers
@@ -47,7 +46,7 @@ const BoardRender= (props) => {
 //     <th>7</th>
 //     </tr>);
 // };
-console.log('entire board?', entireBoard);
+
     return(
         <div>
 
@@ -60,10 +59,7 @@ console.log('entire board?', entireBoard);
            </tbody>
        </table>
        </div>
-       
-  
+    
     )
-
-   
 }
 export default BoardRender;
