@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import BoardRender from './components/boardRender.jsx';
+import helpers from './components/gameLogic.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,13 +25,13 @@ class App extends React.Component {
     }
     //this is the onclick func on the column. when clicked we recieve the column to drop the piece
     handlePieces(column) {
+        console.log(helpers.helper1());
         //only run this if the game status is null and nobody won yet
         if (!this.state.gameStatus) {
             console.log('handle piece', column);
             let columnToCheck = 'column'+column;
             let col = this.state[columnToCheck];
             //now loop backwards to find the last '0' row. we will insert X here
-            let index;
             for (let i = col.length-1; i >= 0; i--) {
                 if (col[i]=== 0) {
                     col[i] = this.state.currentPlayer;
@@ -40,23 +41,22 @@ class App extends React.Component {
             //now check for a winner on each click
             this.checkWinner();
             //if no winner, change player
-            
             //now change current player to 'O'
             if (this.state.currentPlayer === 'X') {
                 this.setState({currentPlayer:'O'});
             } else {
                 this.setState({currentPlayer: 'X'})
             }
-
-
-        }
-       
+        }   
     }
     //function to check for a winner. will only check for each current player
-    checkWinner() {
-        let player = this.state.currentPlayer;
+    checkWinner(player) {
         //first go through all the columns looking for 4 in a row vertically
-        this.checkVertical();
+        checkVertical(player);
+        //now check for horizontal winner
+        let horizontalWinner = helpers.checkHorizontal(this.state.column1, this.state.column2,this.state.column3, this.state.column4,
+            this.state.column5, this.state.column6, this.state.column7);
+            
 
     }
     //checks every column for a vertical winner
@@ -69,8 +69,7 @@ class App extends React.Component {
                 this.loopCol(col);
             }
         }
-
-        
+    
     }
     //helper function to loop through 1 given column, and find if winner
     loopCol(column) {
@@ -96,6 +95,7 @@ class App extends React.Component {
    
     render() {
         return <div>
+           
             Current Player: {this.state.currentPlayer}
             <br></br>
             <h2>{this.state.gameStatus}</h2>

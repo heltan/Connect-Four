@@ -32,21 +32,6 @@ const BoardRender= (props) => {
             entireBoard.push(newElem);
 
      }
-     
-     
-// for (let i = 0; i < 6; i ++) {
-//     //now push 7 tr into
-//     boardElement.push(<tr>
-//         <th >1</th>
-//     <th>2</th>
-//     <th>3</th>
-//     <th>4</th>
-//     <th>5</th>
-//     <th>6</th>
-//     <th>7</th>
-//     </tr>);
-// };
-
     return(
         <div>
 
