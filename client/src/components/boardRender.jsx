@@ -4,12 +4,13 @@ import React from 'react';
 const BoardRender= (props) => {
     //test gamelogic
     //make a table
+    console.log('c1', props.c1);
+    console.log('c5', props.c5);
     let entireBoard= [];
-    
     let boardButtons = [];
      //first we want to push the buttons for user to press, to 'drop' checkers
      for (let i = 1; i < 8; i++) {
-        boardButtons.push(<th key={ i}><button onClick= {()=> {
+        boardButtons.push(<th key={i+i}><button onClick= {()=> {
             props.handlePieces(i);
             
         }}>Column {i}</button></th>
@@ -19,15 +20,16 @@ const BoardRender= (props) => {
      for (let x = 1; x <= 7; x ++) {
         let current = props[`c${x}`];
         let boardElement = [];
-        for (let a=1; a<=current.length; a++) {
+        for (let a=0; a<=current.length; a++) {
             if(current[a] !== 0) {
-                boardElement.push(<tr key={a}>{current[a]}</tr>)
+                boardElement.push(<tr key={current+a}>{current[a]}</tr>)
             } else {
-            boardElement.push(<tr key={a}>{a}</tr>);
+            boardElement.push(<tr key={current+a}>_</tr>);
             }
+            //give it a class and make the opacity nothingness
             
         }
-        let newElem = (<th>{boardElement}</th>);
+        let newElem = (<th key={"newboardelement1"+ x}>{boardElement}</th>);
             entireBoard.push(newElem);
 
      }
@@ -48,15 +50,10 @@ const BoardRender= (props) => {
 console.log('entire board?', entireBoard);
     return(
         <div>
-            
-<table>
-    <tbody>
-   
-    </tbody>
-</table>
+
        <table id="gameBoard">
            <tbody> 
-           <tr>
+           <tr key="testingss">
                {boardButtons}
                </tr>
            {entireBoard}

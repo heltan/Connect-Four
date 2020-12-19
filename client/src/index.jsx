@@ -5,15 +5,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentPlayer: 'X',
             board: [], 
             played:[],
             column1:[0,0,0,0,0,0],
-            column2:[0,0,0,0,'X',0],
+            column2:[0,0,0,0,0,0],
             column3:[0,0,0,0,0,0],
             column4:[0,0,0,0,0,0],
-            column5:['X',0,0,0,0,0],
-            column6:[0,0,0,'X',0,0],
-            column7:[0,0,0,0,0,'X']
+            column5:[0,0,0,0,0,0],
+            column6:[0,0,0,0,0,0],
+            column7:[0,0,0,0,0,0]
         }
         this.handlePieces = this.handlePieces.bind(this);
     }
@@ -26,21 +27,32 @@ class App extends React.Component {
         let index;
         for (let i = col.length-1; i >= 0; i--) {
             if (col[i]=== 0) {
-                col[i] = 'X';
+                col[i] = this.state.currentPlayer;
                 break;
             }
         }
-        //now we pass in this col array and the column it's at, to boardrender fun to render new board
+        //now pass the column back to state, for the board to render again
+        console.log('column?', col);
+        console.log('current state of columb', this.state[columnToCheck]);
+        //now change current player to 'O'
+        if (this.state.currentPlayer === 'X') {
+            this.setState({currentPlayer:'O'});
+        } else {
+            this.setState({currentPlayer: 'X'})
+        }
     }
+    //function to check for a winner
+   
     render() {
         return <div>
+            Current Player: {this.state.currentPlayer}
             <table>
                 <tbody>
                 {this.state.board}
                 </tbody>
             </table>
             <BoardRender c1={this.state.column1} c2={this.state.column2} c3={this.state.column3}
-            c4={this.state.column4} c5={this.state.column5}c6={this.state.column6}
+            c4={this.state.column4} c5={this.state.column5} c6={this.state.column6}
             c7={this.state.column7}
              handlePieces = {this.handlePieces}/>
         </div>
