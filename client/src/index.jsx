@@ -25,7 +25,7 @@ class App extends React.Component {
     }
     //this is the onclick func on the column. when clicked we recieve the column to drop the piece
     handlePieces(column) {
-        console.log(helpers.helper1());
+   
         //only run this if the game status is null and nobody won yet
         if (!this.state.gameStatus) {
             console.log('handle piece', column);
@@ -49,16 +49,6 @@ class App extends React.Component {
             }
         }   
     }
-    //function to check for a winner. will only check for each current player
-    checkWinner(player) {
-        //first go through all the columns looking for 4 in a row vertically
-        checkVertical(player);
-        //now check for horizontal winner
-        let horizontalWinner = helpers.checkHorizontal(this.state.column1, this.state.column2,this.state.column3, this.state.column4,
-            this.state.column5, this.state.column6, this.state.column7);
-            
-
-    }
     //checks every column for a vertical winner
     checkVertical() {
         //first loop through every column which is 7
@@ -71,6 +61,21 @@ class App extends React.Component {
         }
     
     }
+    //function to check for a winner. will only check for each current player
+    checkWinner() {
+        let player = this.state.currentPlayer;
+        //first go through all the columns looking for 4 in a row vertically
+        this.checkVertical();
+        //now check for horizontal winner
+        let horizontalWinner = helpers.checkHorizontal(this.state.currentPlayer, this.state.column1, this.state.column2,this.state.column3, this.state.column4,
+            this.state.column5, this.state.column6, this.state.column7);
+            if (horizontalWinner) {
+                this.setState({gameStatus: 'Winner is Player ' + this.state.currentPlayer});
+            }
+            
+
+    }
+    
     //helper function to loop through 1 given column, and find if winner
     loopCol(column) {
         let winArr = [];
@@ -82,10 +87,10 @@ class App extends React.Component {
                 break;
             }
                 else if (column[i]=== player) {
-                    console.log('its equal so we push', column[i], winArr);
+                  
                     winArr.push(player);
                 } else if (column[i]!== player ) {
-                    console.log('its not equal to player', player);
+                
                     winArr = [];
                 }
             
